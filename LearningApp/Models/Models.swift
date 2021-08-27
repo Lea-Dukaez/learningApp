@@ -14,7 +14,6 @@ struct Module: Decodable, Identifiable {
     var test: Test
 }
 
-
 struct Content: Decodable, Identifiable {
     var id: Int
     var image: String

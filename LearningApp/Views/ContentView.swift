@@ -20,7 +20,9 @@ struct ContentView: View {
                     
                     ForEach(model.currentModule!.content.lessons) { lesson in
                         NavigationLink(
-                            destination: DetailsView(lesson: lesson),
+                            destination: ContentDetailView().onAppear(perform: {
+                                model.beginLesson(lesson.id)
+                            }),
                             label: {
                                 ContentPreview(lesson: lesson)
                             })

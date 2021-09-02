@@ -13,10 +13,7 @@ struct ContentPreview: View {
     
     var body: some View {
         ZStack {
-            Rectangle()
-                .foregroundColor(.white)
-                .cornerRadius(10)
-                .shadow(radius: 5)
+            RectangleCard()
                 .aspectRatio(CGSize(width: 335, height: 75), contentMode: .fit)
 
             HStack {

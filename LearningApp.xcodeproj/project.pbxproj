@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		661605C926E10B7800B2995F /* RectangleCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661605C826E10B7800B2995F /* RectangleCard.swift */; };
 		6634899926DF754400260C08 /* CodeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6634899826DF754400260C08 /* CodeTextView.swift */; };
 		66D8A9D626D6420C0058F2C3 /* LearningApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D8A9D526D6420C0058F2C3 /* LearningApp.swift */; };
 		66D8A9D826D6420C0058F2C3 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D8A9D726D6420C0058F2C3 /* HomeView.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		661605C826E10B7800B2995F /* RectangleCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleCard.swift; sourceTree = "<group>"; };
 		6634899826DF754400260C08 /* CodeTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTextView.swift; sourceTree = "<group>"; };
 		66D8A9D226D6420C0058F2C3 /* LearningApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearningApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66D8A9D526D6420C0058F2C3 /* LearningApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningApp.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				66D8A9F726D8B54B0058F2C3 /* ContentPreview.swift */,
 				66D8A9F926D8B6B00058F2C3 /* ContentDetailView.swift */,
 				6634899826DF754400260C08 /* CodeTextView.swift */,
+				661605C826E10B7800B2995F /* RectangleCard.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 				6634899926DF754400260C08 /* CodeTextView.swift in Sources */,
 				66D8A9F626D6A2420058F2C3 /* ContentView.swift in Sources */,
 				66D8A9F026D66F3B0058F2C3 /* Models.swift in Sources */,
+				661605C926E10B7800B2995F /* RectangleCard.swift in Sources */,
 				66D8A9FF26D8E63C0058F2C3 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,9 +1,7 @@
-//
 //  ContentModel.swift
 //  LearningApp
-//
+
 //  Created by Léa Dukaez on 25/08/2021.
-//
 
 import Foundation
 
@@ -21,6 +19,9 @@ class ContentModel: ObservableObject {
     
     // Current lesson explanation
     @Published var currentLessonDescription = NSAttributedString()
+    
+    // Current selected content and test
+    @Published var currentContentSelected: Int?
     
     var styleData: Data?
     
@@ -109,7 +110,7 @@ class ContentModel: ObservableObject {
         currentLessonIndex += 1
         
         // Check that it is within range
-        if currentLessonIndex + 1 < currentModule!.content.lessons.count {
+        if currentLessonIndex < currentModule!.content.lessons.count {
             setCurrentLesson()
         } else {
             // Reset the lesson state

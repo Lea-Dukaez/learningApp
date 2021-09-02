@@ -17,10 +17,7 @@ struct ModulePreview: View {
     
     var body: some View {
         ZStack {
-            Rectangle()
-                .foregroundColor(.white)
-                .cornerRadius(10)
-                .shadow(radius: 5)
+            RectangleCard()
                 .aspectRatio(CGSize(width: 335, height: 175), contentMode: .fit)
             
             HStack {

@@ -16,12 +16,16 @@ class ContentModel: ObservableObject {
     // Current Lesson
     @Published var currentLesson: Lesson?
     var currentLessonIndex = 0
+    // Current Question
+    @Published var currentQuestion: Question?
+    var currentQuestionIndex = 0
     
     // Current lesson explanation
-    @Published var currentLessonDescription = NSAttributedString()
+    @Published var codeText = NSAttributedString()
     
     // Current selected content and test
     @Published var currentContentSelected: Int?
+    @Published var currentTestSelected: Int?
     
     var styleData: Data?
     
@@ -102,7 +106,12 @@ class ContentModel: ObservableObject {
             currentLessonIndex = 0
         }
         
-        setCurrentLesson()
+//        setCurrentLesson()
+        // Set the current Lesson
+        currentLesson = currentModule!.content.lessons[currentLessonIndex]
+        
+        // Set the current Lesson Explanation
+        codeText = addStyling(currentLesson!.explanation)
     }
     
     func nextLesson() {
@@ -111,7 +120,13 @@ class ContentModel: ObservableObject {
         
         // Check that it is within range
         if currentLessonIndex < currentModule!.content.lessons.count {
-            setCurrentLesson()
+//        setCurrentLesson()
+            
+            // Set the current Lesson
+            currentLesson = currentModule!.content.lessons[currentLessonIndex]
+            
+            // Set the current Lesson Explanation
+            codeText = addStyling(currentLesson!.explanation)
         } else {
             // Reset the lesson state
             currentLessonIndex = 0
@@ -124,12 +139,30 @@ class ContentModel: ObservableObject {
         currentLesson = currentModule!.content.lessons[currentLessonIndex]
         
         // Set the current Lesson Explanation
-        currentLessonDescription = addStyling(currentLesson!.explanation)
+        codeText = addStyling(currentLesson!.explanation)
     }
     
     func hasNextLesson() -> Bool {
         return (currentLessonIndex + 1 < currentModule!.content.lessons.count)
     }
+    
+    
+    // MARK: - Test navigation methods
+    
+    func beginTest(_ moduleId: Int) {
+        // set CurrentModule
+        beginModule(moduleId)
+        
+        //Set current question
+        currentQuestionIndex = 0
+        
+        // If there are questions, set the current question to the first one
+        if currentModule?.test.questions.count ?? 0 > 0 {
+            currentQuestion = currentModule!.test.questions[currentQuestionIndex]
+            codeText = addStyling(currentQuestion!.content)
+        }
+    }
+    
     
     // MARK: - Code Styling
     

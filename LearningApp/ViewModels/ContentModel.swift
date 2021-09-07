@@ -163,6 +163,27 @@ class ContentModel: ObservableObject {
         }
     }
     
+    func nextQuestion() {
+        // Advance the lesson
+        currentQuestionIndex += 1
+        
+        // Check that it is within range
+        if currentQuestionIndex < currentModule!.test.questions.count {
+
+            
+            // Set the current Question
+            currentQuestion = currentModule!.test.questions[currentQuestionIndex]
+            
+            // Set the current Question details
+            codeText = addStyling(currentQuestion!.content)
+        } else {
+            // Reset the lesson state
+            currentQuestionIndex = 0
+            currentQuestion = nil
+        }
+    }
+    
+    
     
     // MARK: - Code Styling
     

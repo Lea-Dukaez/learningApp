@@ -14,10 +14,12 @@ struct TestView: View {
     @State var selectedAnswerIndex: Int?
     @State var numCorrect = 0
     @State var submitted = false
+
     
 
     
     var body: some View {
+        
         // Confirm that currentModule is set
         if model.currentQuestion != nil {
             VStack(alignment: .leading) {
@@ -38,6 +40,7 @@ struct TestView: View {
                                     selectedAnswerIndex = index
                                     
                                 }, label: {
+                                    
                                     ZStack {
                                         if submitted == false {
                                             RectangleCard(color: index == selectedAnswerIndex ? Color.gray : Color.white).frame(height: 48)
@@ -70,19 +73,12 @@ struct TestView: View {
                     // Check if answer has been sbmitted
                     if submitted {
 
-                        if model.hasNextQuestion() {
-                           
-                            model.nextQuestion()
-                            
-                            // Reset properties
-                            submitted = false
-                            selectedAnswerIndex = nil
-                            
-                        } else {
-                            print("Show result  view")
-                            selectedAnswerIndex = nil
-                        }
+                        model.nextQuestion()
                         
+                        // Reset properties
+                        submitted = false
+                        selectedAnswerIndex = nil
+ 
                     } else {
                         // Submit the answer
                         
@@ -110,18 +106,25 @@ struct TestView: View {
         else {
             // Test hasn't loaded yet
             // Show progress view
+//            if goToTestResult {
+//                goToTestResult = false
+//                TestResultView(numCorrect: numCorrect)
+//            } else {
+//                ProgressView()
+//            }
+
+            TestResultView(numCorrect: numCorrect)
             
-            ProgressView()
         }
     }
     
     var buttonText:String {
         // Check if answer has been submitted
         if submitted {
-            if model.hasNextQuestion() {
-                return "Next"
-            } else {
+            if model.isLastQuestion() {
                 return "Finish"
+            } else {
+                return "Next"
             }
         }
         else {

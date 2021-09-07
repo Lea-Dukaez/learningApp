@@ -182,8 +182,8 @@ class ContentModel: ObservableObject {
         }
     }
     
-    func hasNextQuestion() -> Bool {
-        return (currentQuestionIndex + 1 < currentModule!.test.questions.count)
+    func isLastQuestion() -> Bool {
+        return (currentQuestionIndex + 1 == currentModule!.test.questions.count)
     }
     
     

@@ -14,6 +14,7 @@ struct TestView: View {
     @State var selectedAnswerIndex: Int?
     @State var numCorrect = 0
     @State var submitted = false
+    
 
     
     var body: some View {
@@ -30,7 +31,7 @@ struct TestView: View {
                 // Answer
                 ScrollView {
                     VStack {
-                        ForEach(0..<model.currentModule!.test.questions[0].answers.count, id:\.self) { index in
+                        ForEach(0..<model.currentQuestion!.answers.count, id:\.self) { index in
                             
                                 Button(action: {
                                     // track selected index
@@ -55,29 +56,49 @@ struct TestView: View {
                                             
                                         }
                                         
-                                        Text(model.currentModule!.test.questions[0].answers[index]).foregroundColor(index == selectedAnswerIndex ? Color.white : Color.black).bold()
+                                        Text(model.currentQuestion!.answers[index]).foregroundColor(index == selectedAnswerIndex ? Color.white : Color.black).bold()
                                     }
                                 }).disabled(submitted)
                         }
                     }.padding()
                 }
                 
-                Spacer()
                 
                 // Button
                 Button(action: {
                     
-                    // Check the answer and increment the counter if correct
-                    submitted = true
-                    if selectedAnswerIndex == model.currentQuestion!.correctIndex {
-                        numCorrect += 1
-//                        model.nextQuestion()
+                    // Check if answer has been sbmitted
+                    if submitted {
+
+                        if model.hasNextQuestion() {
+                           
+                            model.nextQuestion()
+                            
+                            // Reset properties
+                            submitted = false
+                            selectedAnswerIndex = nil
+                            
+                        } else {
+                            print("Show result  view")
+                            selectedAnswerIndex = nil
+                        }
+                        
+                    } else {
+                        // Submit the answer
+                        
+                        // Change submitted state to true
+                        submitted = true
+                        
+                        // Check the answer and increment the counter if correct
+                        if selectedAnswerIndex == model.currentQuestion!.correctIndex {
+                            numCorrect += 1
+                        }
                     }
                     
                 }, label: {
                     ZStack {
                         RectangleCard(color: Color.green).frame(height: 48)
-                        Text("Submit").bold()
+                        Text(buttonText).bold()
                     }.accentColor(.white)
                     .padding()
                 }).disabled(selectedAnswerIndex == nil)
@@ -91,6 +112,20 @@ struct TestView: View {
             // Show progress view
             
             ProgressView()
+        }
+    }
+    
+    var buttonText:String {
+        // Check if answer has been submitted
+        if submitted {
+            if model.hasNextQuestion() {
+                return "Next"
+            } else {
+                return "Finish"
+            }
+        }
+        else {
+            return "Submit"
         }
     }
 }
